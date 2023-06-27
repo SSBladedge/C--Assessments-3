@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using AsmtAPI.Models;
+using AsmtAPI.Data;
 
 namespace AsmtAPI.Controllers;
 
@@ -14,11 +14,13 @@ public class SchooldbController : ControllerBase
         this._DBContext = dBContext;
     }
 
-    [HttpGet("GetAll")]
-    public IActionResult GetAll()
-    {
+    public ErrorOr<Created> AddStudent() { return Results.Created; } //Add student
 
-    }
+    //Get all students 
+
+    //Get all students in a grade 
+
+    //Get an individual student 
 }
 
 

@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using AsmtAPI.Models;
 
-namespace AsmtAPI.Models;
+namespace AsmtAPI.Data;
 
 public partial class SchooldbContext : DbContext
 {
+
+    public DbSet<Student> Student { get; set; } = null!;
+
+    public DbSet<Class> Class { get; set; } = null!;
+
     private readonly IConfiguration configuration;
 
     public SchooldbContext(DbContextOptions<SchooldbContext> options, IConfiguration configuration)
@@ -24,3 +28,5 @@ public partial class SchooldbContext : DbContext
 
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
+
+

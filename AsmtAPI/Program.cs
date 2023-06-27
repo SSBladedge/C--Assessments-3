@@ -1,4 +1,4 @@
-using AsmtAPI.Models;
+using AsmtAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
