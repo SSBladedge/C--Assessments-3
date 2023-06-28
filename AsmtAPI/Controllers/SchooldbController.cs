@@ -100,7 +100,6 @@ public class SchooldbController : ControllerBase
         {
             throw ex;
         }
-
         return true;
     }
 
