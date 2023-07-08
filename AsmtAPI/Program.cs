@@ -11,9 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//below is a dependency injection 
 builder.Services.AddDbContext<SchooldbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStrings"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("ConStrings"));
 });
 
 var app = builder.Build();
