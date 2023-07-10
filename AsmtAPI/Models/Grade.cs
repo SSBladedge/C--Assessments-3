@@ -10,9 +10,9 @@ public enum GradeLevel
     Year_6 = 6
 }
 
-public class Class
+public class Grade
 {
-    public int ClassID { get; set; }
+    public int GradeID { get; set; }
 
     public GradeLevel GradeLevel { get; set; }
 
@@ -20,4 +20,3 @@ public class Class
 
     public ICollection<Student> Students { get; } = new List<Student>();
 }
-

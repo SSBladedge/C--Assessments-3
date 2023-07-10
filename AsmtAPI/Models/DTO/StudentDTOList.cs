@@ -8,7 +8,7 @@ public class StudentDTOList
 
     public string LastName { get; set; } = null!;
 
-    public Class Grade { get; set; } = null!;
+    public Grade Grade { get; set; } = null!;
 }
 
 

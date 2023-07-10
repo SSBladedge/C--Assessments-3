@@ -8,7 +8,7 @@ public partial class SchooldbContext : DbContext
 
     public DbSet<Student> Student { get; set; } = null!;
 
-    public DbSet<Class> Class { get; set; } = null!;
+    public DbSet<Grade> Grade { get; set; } = null!;
 
     private readonly IConfiguration configuration;
 
@@ -19,7 +19,7 @@ public partial class SchooldbContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:ConStrings");
+        => optionsBuilder.UseSqlServer("ConStrings");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

@@ -6,23 +6,23 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AsmtAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class AlphaMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Class",
+                name: "Grade",
                 columns: table => new
                 {
-                    ClassID = table.Column<int>(type: "int", nullable: false)
+                    GradeID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GradeLevel = table.Column<int>(type: "int", nullable: false),
                     Teacher = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Class", x => x.ClassID);
+                    table.PrimaryKey("PK_Grade", x => x.GradeID);
                 });
 
             migrationBuilder.CreateTable(
@@ -35,23 +35,23 @@ namespace AsmtAPI.Migrations
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GradeClassID = table.Column<int>(type: "int", nullable: false)
+                    GradeID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Student", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Student_Class_GradeClassID",
-                        column: x => x.GradeClassID,
-                        principalTable: "Class",
-                        principalColumn: "ClassID",
+                        name: "FK_Student_Grade_GradeID",
+                        column: x => x.GradeID,
+                        principalTable: "Grade",
+                        principalColumn: "GradeID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Student_GradeClassID",
+                name: "IX_Student_GradeID",
                 table: "Student",
-                column: "GradeClassID");
+                column: "GradeID");
         }
 
         /// <inheritdoc />
@@ -61,7 +61,7 @@ namespace AsmtAPI.Migrations
                 name: "Student");
 
             migrationBuilder.DropTable(
-                name: "Class");
+                name: "Grade");
         }
     }
 }

@@ -12,6 +12,6 @@ public class Student
 
     public string? Address { get; set; } = null!;
 
-    public Class Grade { get; set; } = null!;
+    public Grade Grade { get; set; } = null!;
 
 }

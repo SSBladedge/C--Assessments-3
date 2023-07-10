@@ -18,6 +18,9 @@ public class SchooldbController : ControllerBase
         this._DBContext = dBContext;
     }
 
+    //Class Records go here 
+
+
     [HttpGet]                                                                   //GET ALL STUDENTS 
     public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
     {

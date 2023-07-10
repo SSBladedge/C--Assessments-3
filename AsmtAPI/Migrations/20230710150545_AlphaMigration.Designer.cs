@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsmtAPI.Migrations
 {
     [DbContext(typeof(SchooldbContext))]
-    [Migration("20230708181420_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230710150545_AlphaMigration")]
+    partial class AlphaMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,13 +25,13 @@ namespace AsmtAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("AsmtAPI.Models.Class", b =>
+            modelBuilder.Entity("AsmtAPI.Models.Grade", b =>
                 {
-                    b.Property<int>("ClassID")
+                    b.Property<int>("GradeID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClassID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GradeID"));
 
                     b.Property<int>("GradeLevel")
                         .HasColumnType("int");
@@ -40,9 +40,9 @@ namespace AsmtAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ClassID");
+                    b.HasKey("GradeID");
 
-                    b.ToTable("Class");
+                    b.ToTable("Grade");
                 });
 
             modelBuilder.Entity("AsmtAPI.Models.Student", b =>
@@ -63,7 +63,7 @@ namespace AsmtAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("GradeClassID")
+                    b.Property<int>("GradeID")
                         .HasColumnType("int");
 
                     b.Property<string>("LastName")
@@ -72,25 +72,25 @@ namespace AsmtAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("GradeClassID");
+                    b.HasIndex("GradeID");
 
                     b.ToTable("Student");
                 });
 
             modelBuilder.Entity("AsmtAPI.Models.Student", b =>
                 {
-                    b.HasOne("AsmtAPI.Models.Class", "Grade")
-                        .WithMany("Student")
-                        .HasForeignKey("GradeClassID")
+                    b.HasOne("AsmtAPI.Models.Grade", "Grade")
+                        .WithMany("Students")
+                        .HasForeignKey("GradeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Grade");
                 });
 
-            modelBuilder.Entity("AsmtAPI.Models.Class", b =>
+            modelBuilder.Entity("AsmtAPI.Models.Grade", b =>
                 {
-                    b.Navigation("Student");
+                    b.Navigation("Students");
                 });
 #pragma warning restore 612, 618
         }
