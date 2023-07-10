@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsmtAPI.Migrations
 {
     [DbContext(typeof(SchooldbContext))]
-    [Migration("20230710150545_AlphaMigration")]
+    [Migration("20230710151113_AlphaMigration")]
     partial class AlphaMigration
     {
         /// <inheritdoc />

@@ -19,7 +19,7 @@ public partial class SchooldbContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("ConStrings");
+        => optionsBuilder.UseSqlServer("Name=ConnectionStrings:ConStrings");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
