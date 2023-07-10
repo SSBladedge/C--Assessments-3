@@ -50,6 +50,8 @@ public class SchooldbController : ControllerBase
 
         return await students.ToListAsync();
     }
+
+
 }
 
 

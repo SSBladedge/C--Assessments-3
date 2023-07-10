@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsmtAPI.Migrations
 {
     [DbContext(typeof(SchooldbContext))]
-    [Migration("20230706231711_initial create")]
-    partial class initialcreate
+    [Migration("20230708181420_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

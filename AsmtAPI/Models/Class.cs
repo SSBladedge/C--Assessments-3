@@ -18,6 +18,6 @@ public class Class
 
     public string Teacher { get; set; } = null!;
 
-    public ICollection<Student> Student { get; set; } = null!;
+    public ICollection<Student> Students { get; } = new List<Student>();
 }
 
