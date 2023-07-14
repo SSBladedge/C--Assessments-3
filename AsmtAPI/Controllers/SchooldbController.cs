@@ -11,14 +11,13 @@ namespace AsmtAPI.Controllers;
 [Route("api/[controller]")]
 public class SchooldbController : ControllerBase
 {
+
     private readonly SchooldbContext _DBContext;
 
     public SchooldbController(SchooldbContext dBContext)
     {
         this._DBContext = dBContext;
     }
-
-    //Class Records go here 
 
 
     [HttpGet]                                                                   //GET ALL STUDENTS 
@@ -33,11 +32,11 @@ public class SchooldbController : ControllerBase
         _DBContext.Student.Add(student);
         await _DBContext.SaveChangesAsync();
 
-        return CreatedAtAction("Get student", new { id = student.ID }, student);
+        return Created("./api/Schooldb", new { id = student.ID });
     }
 
     [HttpGet("{id}")]                                                          //GET STUDENT WITH ID 
-    public async Task<ActionResult<Student>> GetStudentById(int id)
+    public async Task<ActionResult<Student>> GetStudent(int id)
     {
         var student = await _DBContext.Student.FindAsync(id);
         return (student == null) ? NotFound() : student;
@@ -54,7 +53,7 @@ public class SchooldbController : ControllerBase
         return await students.ToListAsync();
     }
 
-
+    //Grade Records go here 
 }
 
 

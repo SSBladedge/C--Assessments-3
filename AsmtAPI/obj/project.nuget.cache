@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "xl/18bWLunce8X3COR75X4oD3lvbU3F5+Bpy8vTsFS6iz7+sHp4hlLCwnMwwFcDVy8a3prBkx1LtOGvmEhX1Ow==",
+  "dgSpecHash": "vUQO8oYTjMZnqdMfGTb9mbjLyd7T2uJUHZhseF/tK+CHwuIYhD0bkeH5kSSVHtU7sgn46amG+P1DK/NP/O2N0A==",
   "success": true,
   "projectFilePath": "C:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\AsmtAPI.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\gbemi\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\gbemi\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\gbemi\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\gbemi\\.nuget\\packages\\sqlite\\3.13.0\\sqlite.3.13.0.nupkg.sha512",
     "C:\\Users\\gbemi\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
     "C:\\Users\\gbemi\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
     "C:\\Users\\gbemi\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",

@@ -11,7 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//below is a dependency injection 
+//below is a dependency injection
 builder.Services.AddDbContext<SchooldbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("ConStrings"));
@@ -35,13 +35,7 @@ app.MapControllers();
 app.Run();
 
 
-// foreach (Student student in students)
-// {
-//     Console.WriteLine("-----------------------------------------");
-//     Console.WriteLine($"Id:   {student.ID}");
-//     Console.WriteLine($"Name:   {student.FirstName} {student.LastName}");
-//     Console.WriteLine($"dob:   {student.DateOfBirth}");
-//     Console.WriteLine($"Address:   {student.Address}");
-//     Console.WriteLine($"Grade:   {student.Grade}");
-//     Console.WriteLine("-----------------------------------------");
-// }
+
+
+
+

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 namespace AsmtAPI.Models;
 
 public class Student
@@ -8,10 +9,10 @@ public class Student
 
     public string LastName { get; set; } = null!;
 
-    public DateTime DateOfBirth { get; set; }
+    public DateTime DateOfBirth { get; set; }  //DateOnly??
 
     public string? Address { get; set; } = null!;
 
-    public Grade Grade { get; set; } = null!;
+    public virtual Grade Grade { get; set; } = null!;
 
 }
