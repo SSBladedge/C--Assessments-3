@@ -1191,7 +1191,7 @@
           }
         }
       },
-      "System.Text.Json/7.0.0": {
+      "System.Text.Json/7.0.3": {
         "type": "package",
         "dependencies": {
           "System.Text.Encodings.Web": "7.0.0"
@@ -3713,10 +3713,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Text.Json/7.0.0": {
-      "sha512": "DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
+    "System.Text.Json/7.0.3": {
+      "sha512": "AyjhwXN1zTFeIibHimfJn6eAsZ7rTBib79JQpzg8WAuR/HKDu9JGNHTuu3nbbXQ/bgI+U4z6HtZmCHNXB1QXrQ==",
       "type": "package",
-      "path": "system.text.json/7.0.0",
+      "path": "system.text.json/7.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -3779,7 +3779,7 @@
         "lib/net7.0/System.Text.Json.xml",
         "lib/netstandard2.0/System.Text.Json.dll",
         "lib/netstandard2.0/System.Text.Json.xml",
-        "system.text.json.7.0.0.nupkg.sha512",
+        "system.text.json.7.0.3.nupkg.sha512",
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -3918,7 +3918,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 7.0.7",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.7",
       "SQLite >= 3.13.0",
-      "Swashbuckle.AspNetCore >= 6.4.0"
+      "Swashbuckle.AspNetCore >= 6.4.0",
+      "System.Text.Json >= 7.0.3"
     ]
   },
   "packageFolders": {
@@ -3927,11 +3928,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\AsmtAPI.csproj",
+      "projectUniqueName": "C:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\AsmtAPI.csproj",
       "projectName": "AsmtAPI",
-      "projectPath": "c:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\AsmtAPI.csproj",
+      "projectPath": "C:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\AsmtAPI.csproj",
       "packagesPath": "C:\\Users\\gbemi\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\obj\\",
+      "outputPath": "C:\\Users\\gbemi\\Desktop\\C#-Assessments-3\\AsmtAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gbemi\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3981,6 +3982,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.4.0, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[7.0.3, )"
           }
         },
         "imports": [

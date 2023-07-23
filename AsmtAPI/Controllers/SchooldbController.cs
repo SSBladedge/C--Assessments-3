@@ -23,7 +23,8 @@ public class SchooldbController : ControllerBase
     [HttpGet]                                                                   //GET ALL STUDENTS 
     public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
     {
-        return await _DBContext.Student.ToListAsync();
+        var studentList = await _DBContext.Student.Include(student => student.Grade).ToListAsync();
+        return studentList;
     }
 
     [HttpPost]                                                                 //REGISTER A STUDENT 
@@ -45,18 +46,16 @@ public class SchooldbController : ControllerBase
     [HttpGet("{start}/{end}")]                                                  //GET STUDENT WITHIN GRADE RANGE 
     public async Task<ActionResult<IEnumerable<Student>>> GetStudentByGrade(int start, int end)
     {
-        var students = (from student in _DBContext.Student
-                        where start <= (int)student.Grade.GradeLevel &&
-                        (int)student.Grade.GradeLevel <= end
-                        select student);
-
-        return await students.ToListAsync();
+        var students = await _DBContext.Student
+                                       .Where(student => (int)student.Grade.GradeLevel >= start && (int)student.Grade.GradeLevel <= end)
+                                       .ToListAsync();
+        return students;
     }
-
-    //Grade Records go here 
 }
 
+//REMOVE ALL _DBContext REFERENCES - create school service to map DTOs and receive requests to _DBContext (it will be in service folder)
 
+//ADD A TRY/CATCH TO ALL REQUESTS IN CONTROLLER
 
 
 
