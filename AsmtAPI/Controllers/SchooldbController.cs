@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using AsmtAPI.Models;
 using AsmtAPI.Data;
 
 
@@ -12,44 +11,37 @@ namespace AsmtAPI.Controllers;
 public class SchooldbController : ControllerBase
 {
 
-    private readonly SchooldbContext _DBContext;
+    private readonly IStudentService _studentService;
 
-    public SchooldbController(SchooldbContext dBContext)
+    public SchooldbController(IStudentService studentService)
     {
-        this._DBContext = dBContext;
+        this._studentService = studentService;
     }
 
 
     [HttpGet]                                                                   //GET ALL STUDENTS 
-    public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
+    public async Task<ActionResult<List<Student>>> GetAllStudents()
     {
-        var studentList = await _DBContext.Student.Include(student => student.Grade).ToListAsync();
-        return studentList;
+        return Ok(await _studentService.GetAllStudents());
     }
 
     [HttpPost]                                                                 //REGISTER A STUDENT 
     public async Task<ActionResult<Student>> RegisterStudent(Student student)
     {
-        _DBContext.Student.Add(student);
-        await _DBContext.SaveChangesAsync();
-
+        await _studentService.AddStudent(student);
         return Created("./api/Schooldb", new { id = student.ID });
     }
 
     [HttpGet("{id}")]                                                          //GET STUDENT WITH ID 
     public async Task<ActionResult<Student>> GetStudent(int id)
     {
-        var student = await _DBContext.Student.FindAsync(id);
-        return (student == null) ? NotFound() : student;
+        return Ok(await _studentService.GetStudentById(id));
     }
 
     [HttpGet("{start}/{end}")]                                                  //GET STUDENT WITHIN GRADE RANGE 
-    public async Task<ActionResult<IEnumerable<Student>>> GetStudentByGrade(int start, int end)
+    public async Task<ActionResult<List<Student>>> GetStudentByGrade(int start, int end)
     {
-        var students = await _DBContext.Student
-                                       .Where(student => (int)student.Grade.GradeLevel >= start && (int)student.Grade.GradeLevel <= end)
-                                       .ToListAsync();
-        return students;
+        return Ok(await _studentService.GetStudentByClassRange(start, end));
     }
 }
 
