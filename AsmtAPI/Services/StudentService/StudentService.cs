@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using AsmtAPI.Data;
+using AutoMapper;
 
 namespace AsmtAPI.Services.StudentService;
 
@@ -7,25 +8,41 @@ public class StudentService : IStudentService
 {
     private readonly SchooldbContext _DBContext;
 
-    public StudentService(SchooldbContext dBContext)
+    private readonly IMapper _mapper;
+
+    public StudentService(SchooldbContext dBContext, IMapper mapper)
     {
         this._DBContext = dBContext;
+        _mapper = mapper;
     }
 
-    async Task<List<Student>> IStudentService.GetAllStudents()
-    {
-        var studentList = _DBContext.Student.Include(student => student.Grade).ToListAsync();
-
-        return (studentList == null) ? throw new Exception("student list is null") : await studentList;
-    }
-    async Task<Student> IStudentService.AddStudent(Student student)
+    async Task<ServicesResponse<List<GetStudentDTO>>> IStudentService.GetAllStudents()
     {
         try
         {
-            _DBContext.Student.Add(student);
+            var serviceResponse = new ServicesResponse<List<GetStudentDTO>>();
+            var studentList = await _DBContext.Student
+                                    .Include(student => student.Grade.GradeLevel)
+                                    .Include(student => student.Grade.Teacher)
+                                    .ToListAsync();
+            serviceResponse.Data = studentList;
+            return serviceResponse;
+        }
+        catch
+        {
+            throw new Exception("No records found");
+        }
+    }
+    async Task<ServicesResponse<GetStudentDTO>> IStudentService.AddStudent(AddStudentDTO student)
+    {
+        try
+        {
+            var serviceResponse = new ServicesResponse<GetStudentDTO>();
+            await _DBContext.Student.Add(student);
+            serviceResponse.Data = student;
             _DBContext.SaveChanges();
 
-            return student;
+            return serviceResponse;
         }
         catch
         {
@@ -34,18 +51,37 @@ public class StudentService : IStudentService
     }
 
 
-    async Task<Student> IStudentService.GetStudentById(int id)
+    async Task<ServicesResponse<GetStudentDTO>> IStudentService.GetStudentById(int id)
     {
-        var student = await _DBContext.Student.FindAsync(id);
-
-        return (student == null) ? throw new Exception("student not found") : student;
+        try
+        {
+            var serviceResponse = new ServicesResponse<GetStudentDTO>();
+            var student = await _DBContext.Student.FindAsync(id);
+            serviceResponse.Data = student;
+            return serviceResponse;
+        }
+        catch
+        {
+            throw new Exception("student not found");
+        }
     }
-    async Task<List<Student>> IStudentService.GetStudentByClassRange(int start, int end)
+    async Task<ServicesResponse<List<GetStudentDTO>>> IStudentService.GetStudentByClassRange(int start, int end)
     {
-        var students = _DBContext.Student
-                                .Where(student => (int)student.Grade.GradeLevel >= start && (int)student.Grade.GradeLevel <= end)
-                                .ToListAsync();
-        return await students;
+        try
+        {
+            var serviceResponse = new ServicesResponse<List<GetStudentDTO>>();
+
+            var students = await _DBContext.Student
+                            .Where(student => (int)student.Grade.GradeLevel >= start
+                                           && (int)student.Grade.GradeLevel <= end)
+                            .ToListAsync();
+            serviceResponse.Data = students;
+            return serviceResponse;
+        }
+        catch
+        {
+            throw new Exception("No students were found");
+        }
     }
 }
 
@@ -80,3 +116,5 @@ public class StudentService : IStudentService
 //                                        .ToListAsync();
 //         return students;
 //     }
+
+// return (studentList == null) ? throw new Exception("student list is null") : await studentList;

@@ -1,5 +1,6 @@
 global using AsmtAPI.Models;
 global using AsmtAPI.Services.StudentService;
+global using AsmtAPI.DTOs;
 using System.Security.AccessControl;
 using AsmtAPI.Data;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +18,9 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 builder.Services.AddScoped<IStudentService, StudentService>();
 
 //below is a dependency injection

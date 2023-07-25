@@ -6,10 +6,10 @@ namespace AsmtAPI.Services.StudentService;
 
 public interface IStudentService
 {
-    Task<List<Student>> GetAllStudents();
-    Task<Student> AddStudent(Student student);
-    Task<Student> GetStudentById(int id);
-    Task<List<Student>> GetStudentByClassRange(int start, int end);
+    Task<ServicesResponse<List<GetStudentDTO>>> GetAllStudents();
+    Task<ServicesResponse<GetStudentDTO>> AddStudent(AddStudentDTO student);
+    Task<ServicesResponse<GetStudentDTO>> GetStudentById(int id);
+    Task<ServicesResponse<List<GetStudentDTO>>> GetStudentByClassRange(int start, int end);
 
 }
 

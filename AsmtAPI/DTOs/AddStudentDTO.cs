@@ -1,6 +1,6 @@
-namespace AsmtAPI.Models.DTO; //Data Transfer Objects 
+namespace AsmtAPI.DTOs;
 
-public class StudentDTOList
+public class AddStudentDTO
 {
     public int ID { get; set; }
 

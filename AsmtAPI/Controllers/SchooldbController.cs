@@ -20,26 +20,26 @@ public class SchooldbController : ControllerBase
 
 
     [HttpGet]                                                                   //GET ALL STUDENTS 
-    public async Task<ActionResult<List<Student>>> GetAllStudents()
+    public async Task<ActionResult<List<GetStudentDTO>>> GetAllStudents()
     {
         return Ok(await _studentService.GetAllStudents());
     }
 
     [HttpPost]                                                                 //REGISTER A STUDENT 
-    public async Task<ActionResult<Student>> RegisterStudent(Student student)
+    public async Task<ActionResult<GetStudentDTO>> RegisterStudent(AddStudentDTO student)
     {
         await _studentService.AddStudent(student);
         return Created("./api/Schooldb", new { id = student.ID });
     }
 
     [HttpGet("{id}")]                                                          //GET STUDENT WITH ID 
-    public async Task<ActionResult<Student>> GetStudent(int id)
+    public async Task<ActionResult<GetStudentDTO>> GetStudent(int id)
     {
         return Ok(await _studentService.GetStudentById(id));
     }
 
     [HttpGet("{start}/{end}")]                                                  //GET STUDENT WITHIN GRADE RANGE 
-    public async Task<ActionResult<List<Student>>> GetStudentByGrade(int start, int end)
+    public async Task<ActionResult<List<GetStudentDTO>>> GetStudentByGrade(int start, int end)
     {
         return Ok(await _studentService.GetStudentByClassRange(start, end));
     }
