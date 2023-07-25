@@ -1,6 +1,6 @@
 namespace AsmtAPI.DTOs;
 
-public class GetStudentDTO
+public class GetStudentResponseDTO
 {
     public int ID { get; set; }
 

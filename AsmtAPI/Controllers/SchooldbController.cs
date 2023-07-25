@@ -1,8 +1,4 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using AsmtAPI.Data;
-
-
 
 namespace AsmtAPI.Controllers;
 
@@ -20,34 +16,30 @@ public class SchooldbController : ControllerBase
 
 
     [HttpGet]                                                                   //GET ALL STUDENTS 
-    public async Task<ActionResult<List<GetStudentDTO>>> GetAllStudents()
+    public async Task<ActionResult<ServicesResponse<List<GetStudentResponseDTO>>>> GetAllStudents()
     {
         return Ok(await _studentService.GetAllStudents());
     }
 
     [HttpPost]                                                                 //REGISTER A STUDENT 
-    public async Task<ActionResult<GetStudentDTO>> RegisterStudent(AddStudentDTO student)
+    public async Task<ActionResult<ServicesResponse<GetStudentResponseDTO>>> RegisterStudent(AddStudentRequestDTO student)
     {
-        await _studentService.AddStudent(student);
-        return Created("./api/Schooldb", new { id = student.ID });
+        return Ok(await _studentService.AddStudent(student));
     }
 
     [HttpGet("{id}")]                                                          //GET STUDENT WITH ID 
-    public async Task<ActionResult<GetStudentDTO>> GetStudent(int id)
+    public async Task<ActionResult<ServicesResponse<GetStudentResponseDTO>>> GetStudent(int id)
     {
         return Ok(await _studentService.GetStudentById(id));
     }
 
     [HttpGet("{start}/{end}")]                                                  //GET STUDENT WITHIN GRADE RANGE 
-    public async Task<ActionResult<List<GetStudentDTO>>> GetStudentByGrade(int start, int end)
+    public async Task<ActionResult<ServicesResponse<List<GetStudentResponseDTO>>>> GetStudentByGrade(int start, int end)
     {
         return Ok(await _studentService.GetStudentByClassRange(start, end));
     }
 }
 
-//REMOVE ALL _DBContext REFERENCES - create school service to map DTOs and receive requests to _DBContext (it will be in service folder)
-
-//ADD A TRY/CATCH TO ALL REQUESTS IN CONTROLLER
 
 
 
