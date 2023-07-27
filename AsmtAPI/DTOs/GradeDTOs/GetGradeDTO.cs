@@ -1,6 +1,6 @@
-namespace AsmtAPI.Models;
+namespace AsmtAPI.DTOs.GradeDTOs;
 
-public class Grade
+public class GetGradeResponseDTO
 {
     public int GradeID { get; set; }
 
@@ -10,5 +10,6 @@ public class Grade
 
     public List<Student>? Students { get; set; }
 }
+
 
 

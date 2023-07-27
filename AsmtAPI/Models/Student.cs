@@ -11,7 +11,9 @@ public class Student
 
     public DateTime DateOfBirth { get; set; }  //DateOnly??
 
-    public string? Address { get; set; } = null!;
+    public string Address { get; set; } = null!;
+
+    public int GradeID { get; set; }
 
     public virtual Grade Grade { get; set; } = null!;
 

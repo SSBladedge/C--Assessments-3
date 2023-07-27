@@ -1,9 +1,9 @@
 global using AsmtAPI.Models;
 global using AsmtAPI.Services.StudentService;
-global using AsmtAPI.DTOs;
+global using AsmtAPI.DTOs.StudentDTOs;
+global using Microsoft.EntityFrameworkCore;
 using System.Security.AccessControl;
 using AsmtAPI.Data;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

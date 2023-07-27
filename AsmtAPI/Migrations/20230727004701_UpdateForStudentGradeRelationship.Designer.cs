@@ -4,6 +4,7 @@ using AsmtAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AsmtAPI.Migrations
 {
     [DbContext(typeof(SchooldbContext))]
-    partial class SchooldbContextModelSnapshot : ModelSnapshot
+    [Migration("20230727004701_UpdateForStudentGradeRelationship")]
+    partial class UpdateForStudentGradeRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -15,70 +15,131 @@ public class StudentService : IStudentService
         this._mapper = mapper;
     }
 
-    async Task<ServicesResponse<List<GetStudentResponseDTO>>> IStudentService.GetAllStudents()
+    async Task<ServicesResponse<List<GetStudentResponseDTO>>> IStudentService.GetAllStudents()                        //GET ALL STUDENTS
     {
+        var serviceResponse = new ServicesResponse<List<GetStudentResponseDTO>>();
         try
         {
-            var serviceResponse = new ServicesResponse<List<GetStudentResponseDTO>>();
-            var students = await _DBContext.Student
-                                    .Include(student => student.Grade.GradeLevel)
-                                    .Include(student => student.Grade.Teacher)
-                                    .ToListAsync();
+            var students = await _DBContext.Student.ToListAsync();
             serviceResponse.Data = students.Select(student => _mapper.Map<GetStudentResponseDTO>(student)).ToList();
-            return serviceResponse;
         }
-        catch
+        catch (Exception ex)
         {
-            throw new Exception("No records found");
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
         }
+        return serviceResponse;
     }
-    async Task<ServicesResponse<GetStudentResponseDTO>> IStudentService.AddStudent(AddStudentRequestDTO student)
+    async Task<ServicesResponse<GetStudentResponseDTO>> IStudentService.AddStudent(AddStudentRequestDTO newStudent)    //ADD STUDENT
     {
+        var serviceResponse = new ServicesResponse<GetStudentResponseDTO>();
         try
         {
-            var serviceResponse = new ServicesResponse<GetStudentResponseDTO>();
-            _DBContext.Student.Add(_mapper.Map<Student>(student));
-            serviceResponse.Data = _mapper.Map<GetStudentResponseDTO>(student); ;
-            _DBContext.SaveChanges();
+            var student = _mapper.Map<Student>(newStudent);
+            _DBContext.Student.Add(student);
+            serviceResponse.Data = _mapper.Map<GetStudentResponseDTO>(student);
+            await _DBContext.SaveChangesAsync();
 
-            return serviceResponse;
         }
-        catch
+        catch (Exception ex)
         {
-            throw new Exception("students not found");
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
         }
+        return serviceResponse;
     }
 
 
-    async Task<ServicesResponse<GetStudentResponseDTO>> IStudentService.GetStudentById(int id)
+    async Task<ServicesResponse<GetStudentResponseDTO>> IStudentService.GetStudentById(int id)                         //GET STUDENTS BY ID
     {
+        var serviceResponse = new ServicesResponse<GetStudentResponseDTO>();
         try
         {
-            var serviceResponse = new ServicesResponse<GetStudentResponseDTO>();
             var student = await _DBContext.Student.FindAsync(id);
             serviceResponse.Data = _mapper.Map<GetStudentResponseDTO>(student);
-            return serviceResponse;
         }
-        catch
+        catch (Exception ex)
         {
-            throw new Exception("student not found");
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
         }
+        return serviceResponse;
     }
-    async Task<ServicesResponse<List<GetStudentResponseDTO>>> IStudentService.GetStudentByClassRange(int start, int end)
+    async Task<ServicesResponse<List<GetStudentResponseDTO>>> IStudentService.GetStudentByClassRange(int start, int end)  //GET STUDENTS BY CLASSES
     {
+        var serviceResponse = new ServicesResponse<List<GetStudentResponseDTO>>();
         try
         {
-            var serviceResponse = new ServicesResponse<List<GetStudentResponseDTO>>();
             var students = await _DBContext.Student
                             .Where(student => (int)student.Grade.GradeLevel >= start
                                            && (int)student.Grade.GradeLevel <= end)
                             .ToListAsync();
             serviceResponse.Data = students.Select(student => _mapper.Map<GetStudentResponseDTO>(student)).ToList();
-            return serviceResponse;
         }
-        catch
+        catch (Exception ex)
         {
-            throw new Exception("No students were found");
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
         }
+        return serviceResponse;
+    }
+
+    async Task<ServicesResponse<GetStudentResponseDTO>> IStudentService.UpdateStudent(UpdateStudentRequestDTO updatedStudent) //UPDATE STUDENT
+    {
+        var serviceResponse = new ServicesResponse<GetStudentResponseDTO>();
+        try
+        {
+            var student = await _DBContext.Student.FindAsync(updatedStudent.ID);
+
+            if (student is null)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = $"Student with id {updatedStudent.ID} does not exist in records";
+            }
+            else
+            {
+                _mapper.Map(updatedStudent, student);
+                _DBContext.SaveChanges();
+
+                serviceResponse.Data = _mapper.Map<GetStudentResponseDTO>(student);
+            }
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
+    }
+
+    async Task<ServicesResponse<List<GetStudentResponseDTO>>> IStudentService.DeleteStudentById(int id)                       //DELETE STUDENT
+    {
+        var serviceResponse = new ServicesResponse<List<GetStudentResponseDTO>>();
+        try
+        {
+            var student = await _DBContext.Student.FindAsync(id);
+
+            if (student is null)
+            {
+                serviceResponse.Success = false;
+                serviceResponse.Message = $"Student with id {id} does not exist in records";
+            }
+            else
+            {
+                _DBContext.Student.Remove(student);
+                _DBContext.SaveChanges();
+
+                serviceResponse.Data = _DBContext.Student
+                                            .Select(student => _mapper
+                                            .Map<GetStudentResponseDTO>(student))
+                                            .ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Success = false;
+            serviceResponse.Message = ex.Message;
+        }
+        return serviceResponse;
     }
 }

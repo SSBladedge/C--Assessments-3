@@ -7,9 +7,9 @@ namespace AsmtAPI.Data;
 public partial class SchooldbContext : DbContext
 {
 
-    public DbSet<Student> Student { get; set; } = null!;
+    public DbSet<Student> Student => Set<Student>();
 
-    public DbSet<Grade> Grade { get; set; } = null!;
+    public DbSet<Grade> Grade => Set<Grade>();
 
     private readonly IConfiguration configuration;
 
@@ -24,7 +24,7 @@ public partial class SchooldbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // modelBuilder.Entity<Grade>().HasOptional(grade => grade.student).withRequired(st => st.Grade);
+        // ==modelBuilder.Entity<Grade>().HasOptional(grade => grade.student).withRequired(st => st.Grade);
         OnModelCreatingPartial(modelBuilder);
     }
 

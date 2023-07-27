@@ -1,12 +1,12 @@
-namespace AsmtAPI.DTOs;
+namespace AsmtAPI.DTOs.StudentDTOs;
 
-public class GetStudentResponseDTO
+public class AddStudentRequestDTO
 {
-    public int ID { get; set; }
-
     public string FirstName { get; set; } = null!;
 
     public string LastName { get; set; } = null!;
+
+    public string Address { get; set; } = null!;
 
     public Grade Grade { get; set; } = null!;
 }
